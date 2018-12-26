@@ -54,14 +54,14 @@ class User < ActiveRecord::Base
   def password=(new_password)
     self.password_digest = dumb_hash(new_password)
   end
-  
+
   def authenticate(password)
     return nil unless dumb_hash(password) == password_digest
     self
   end
-  
+
   private
-  
+
   def dumb_hash(input)
     input.bytes.reduce(:+)
   end
@@ -177,7 +177,9 @@ These fields are designed to make it easy to include a password confirmation box
   Password Confirmation: <%= f.password_field :password_confirmation %>
   <%= f.submit "Submit" %>
 <% end %>
+```
 
+```ruby
 # app/controllers/users_controller.rb
 class UsersController < ApplicationController
   def create
